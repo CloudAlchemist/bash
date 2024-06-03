@@ -1,0 +1,54 @@
+Title: Amazon EBS Snapshot Management Guide
+
+Introduction:
+This guide provides instructions on how to use a Bash script to automate the process of creating snapshots of Amazon Elastic Block Store (EBS) volumes using the AWS CLI. The script also manages the retention of snapshots, keeping a specified number of recent snapshots and deleting older ones to conserve storage space.
+
+Prerequisites:
+1. AWS CLI installed and configured with appropriate IAM permissions to create and manage snapshots of EBS volumes.
+2. Access to an AWS account with Amazon EC2 instances and EBS volumes to create and manage snapshots.
+
+Script Usage:
+1. Download the provided Bash script (manage_ebs_snapshots.sh) to your local machine or EC2 instance.
+
+2. Open the script in a text editor and set the following variables:
+   - AWS_REGION: Your AWS region code (e.g., us-west-2).
+   - VOLUME_ID: The ID of the EBS volume for which you want to create and manage snapshots.
+   - SNAPSHOTS_TO_KEEP: The number of snapshots to keep. Older snapshots beyond this number will be deleted.
+
+3. Save the changes to the script.
+
+4. Make the script executable by running the following command in the terminal:
+
+chmod +x manage_ebs_snapshots.sh
+
+5. Test the script manually by running it in the terminal:
+
+./manage_ebs_snapshots.sh
+
+This command will create a snapshot of the specified EBS volume and manage the retention of snapshots according to the configured parameters.
+
+Automating with Cron:
+1. Open the cron jobs configuration file for editing using the following command:
+
+crontab -e
+
+2. Add a new cron job entry to schedule the snapshot management script to run every Friday night:
+
+0 0 * * 5 /path/to/manage_ebs_snapshots.sh
+
+This cron job entry runs the manage_ebs_snapshots.sh script at midnight (0:00) every Friday (day of the week: 5).
+
+3. Save the changes and exit the editor.
+
+4. Verify that the cron job has been added successfully by listing the current cron jobs using the following command:
+
+crontab -l
+
+You should see the newly added cron job entry for the snapshot management script.
+
+5. Sit back and relax! The script automates the process of creating snapshots of Amazon EBS volumes and managing snapshot retention, ensuring data backup and storage efficiency in your AWS environment.
+
+Note:
+- Ensure that the AWS CLI is installed and configured correctly with the necessary permissions to create and manage snapshots of EBS volumes.
+- Exercise caution when running the script, as it will create snapshots of the specified EBS volume(s) and delete older snapshots immediately upon execution.
+- Adjust the script parameters according to your specific requirements and environment, such as the AWS region, EBS volume ID, and the number of snapshots to keep.
