@@ -1,0 +1,49 @@
+Title: Log Cleanup and Rotation Guide
+
+Introduction:
+This guide provides instructions on how to perform log cleanup and rotation using a Bash script and automate the process using cron jobs. Log cleanup and rotation are essential for managing log files efficiently, preventing disk space issues, and maintaining log data for analysis.
+
+Script Usage:
+1. Download the provided Bash script (log_cleanup.sh) to your server or local machine.
+
+2. Open the script in a text editor and set the following variables:
+   - LOG_DIR: The directory path where your log files are located.
+   - LOG_EXTENSION: The file extension of the log files to be cleaned up.
+   - RETENTION_PERIOD_WEEKS: The number of weeks to retain log files.
+
+3. Save the changes to the script.
+
+4. Make the script executable by running the following command in the terminal:
+
+chmod +x log_cleanup.sh
+
+5. Test the script manually by running it in the terminal:
+
+./log_cleanup.sh
+
+This command will perform log cleanup and rotation based on the configured parameters.
+
+Automating with Cron:
+1. Open the cron jobs configuration file for editing using the following command:
+
+crontab -e
+
+2. Add a new cron job entry to schedule the log cleanup script to run every Friday night. Use the following format:
+
+0 0 * * 5 /path/to/log_cleanup.sh
+
+This cron job entry runs the log cleanup script (/path/to/log_cleanup.sh) at midnight (0:00) every Friday (day of the week: 5).
+
+3. Save the changes and exit the editor.
+
+4. Verify that the cron job has been added successfully by listing the current cron jobs using the following command:
+
+crontab -l
+
+You should see the newly added cron job entry for the log cleanup script.
+
+5. Sit back and relax! The cron job will automatically perform log cleanup and rotation every Friday night, ensuring that your log files are well-managed and maintained.
+
+Note:
+- Ensure that the script (log_cleanup.sh) has the necessary permissions to access and modify log files.
+- Adjust the script parameters and cron job schedule according to your specific requirements and environment.
