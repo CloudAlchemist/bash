@@ -1,0 +1,56 @@
+Title: Amazon RDS Daily Backup Guide
+
+Introduction:
+This guide provides instructions on how to use a Bash script to automate the process of creating daily backups for an Amazon Relational Database Service (RDS) instance and storing them in an Amazon S3 bucket. Regular backups are essential for data protection and disaster recovery in AWS environments.
+
+Prerequisites:
+1. Access to an AWS account with an Amazon RDS instance to be backed up.
+2. AWS CLI installed and configured with appropriate IAM permissions to access RDS and S3.
+
+Script Usage:
+1. Download the provided Bash script (backup_rds.sh) to your local machine or server.
+
+2. Open the script in a text editor and set the following variables:
+   - AWS_REGION: Your AWS region code (e.g., us-west-2).
+   - RDS_INSTANCE_ID: The identifier of the RDS instance to be backed up.
+   - S3_BUCKET: The name of the Amazon S3 bucket where backups will be stored.
+   - BACKUP_PREFIX: The prefix for backup filenames.
+   - BACKUPS_TO_KEEP: The number of backups to keep. Older backups beyond this number will be deleted from S3.
+
+3. Save the changes to the script.
+
+4. Make the script executable by running the following command in the terminal:
+
+chmod +x backup_rds.sh
+
+5. Test the script manually by running it in the terminal:
+
+./backup_rds.sh
+
+This command will perform a backup of the specified RDS instance, upload it to the specified S3 bucket, and delete older backups from S3 to keep only the last 5 backups.
+
+Automating with Cron:
+1. Open the cron jobs configuration file for editing using the following command:
+
+crontab -e
+
+2. Add a new cron job entry to schedule the backup script to run daily at a specified time. For example, to run the script every day at midnight:
+
+0 0 * * * /path/to/backup_rds.sh
+
+This cron job entry runs the backup_rds.sh script at midnight (0:00) every day.
+
+3. Save the changes and exit the editor.
+
+4. Verify that the cron job has been added successfully by listing the current cron jobs using the following command:
+
+crontab -l
+
+You should see the newly added cron job entry for the backup script.
+
+5. Sit back and relax! The script automates the process of creating daily backups for your Amazon RDS instance, providing data protection and peace of mind in your AWS environment.
+
+Note:
+- Ensure that the AWS CLI is installed and configured correctly with the necessary permissions to access Amazon RDS and S3.
+- Exercise caution when running the script, as it will perform database backups, upload them to S3, and delete older backups from S3 immediately upon execution.
+- Adjust the script parameters according to your specific requirements and environment
