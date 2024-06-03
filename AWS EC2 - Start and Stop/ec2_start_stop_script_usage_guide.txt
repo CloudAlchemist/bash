@@ -1,0 +1,39 @@
+Title: EC2 Instance Start/Stop Script Usage Guide
+
+Introduction:
+This guide provides instructions on how to use the provided Bash script to start and stop an EC2 instance on AWS. This script helps you manage EC2 instances more efficiently, allowing you to start instances when needed and stop them to save costs when they're not in use.
+
+Prerequisites:
+- AWS CLI installed and configured with appropriate IAM permissions.
+- Access to an AWS account with EC2 instances to start/stop.
+
+Script Usage:
+1. Download the provided Bash script (ec2_start_stop.sh) to your local machine.
+
+2. Open the script in a text editor and set the following variables:
+   - AWS_REGION: Your AWS region code (e.g., us-west-2).
+   - INSTANCE_ID: The ID of the EC2 instance you want to start/stop.
+
+3. Save the changes to the script.
+
+4. Make the script executable by running the following command in the terminal:
+
+chmod +x ec2_start_stop.sh
+
+5. To start the EC2 instance, run the script with the following command:
+
+./ec2_start_stop.sh start
+
+This command will start the specified EC2 instance in the provided AWS region. If the instance is already running, it will print a message stating that the instance is already running.
+
+6. To stop the EC2 instance, run the script with the following command:
+
+./ec2_start_stop.sh stop
+
+This command will stop the specified EC2 instance in the provided AWS region. If the instance is already stopped, it will print a message stating that the instance is already stopped.
+
+Note:
+- Ensure that you have the necessary IAM permissions to start and stop EC2 instances in your AWS account.
+- Replace "your-region" and "your-instance-id" in the script with your actual AWS region code and EC2 instance ID.
+- Exercise caution when starting and stopping EC2 instances, as this can affect your applications and services running on those instances.
+
